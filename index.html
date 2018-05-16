@@ -1,0 +1,136 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Angular</title>
+    <script src="scripts/angular/angular.min.js"></script>
+    <script src="scripts/code/app.js"></script>
+    <script src="scripts/code/codeCtrl.js"></script>
+    <link href="theme/theme.css" rel="stylesheet" />
+</head>
+<body ng-app="myApp" ng-controller="myCtrl as ctrl">
+    <div class="header">
+        <div class="top">
+            <div class="row">
+                <div>
+                    <span>Business Name:</span>
+                    <input class="text" type="text" ng-model="ctrl.name" />
+                </div>
+            </div>
+            <div class="row">
+                <div>
+                    <input type="checkbox" id="hasService" ng-model="ctrl.hasService" />
+                    <label for="hasService">Has Service</label>
+                </div>
+                <div ng-show="ctrl.hasService">
+                    Server Url:
+                    <input class="text" type="text" ng-model="ctrl.url" />
+                </div>
+                <div ng-show="ctrl.hasService">
+                    <input type="checkbox" id="simpleService" ng-model="ctrl.simpleService" />
+                    <label for="simpleService">Simple Service</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main">
+        <div class="file">
+            <h3 ng-click="file_app=!file_app">app.js</h3>
+            <div class="code" ng-show="file_app">
+                <pre class="pre">
+<span class="kwd">var</span> app = angular.module(<b class="str">'myApp'</b>, []);
+               </pre>
+            </div>
+        </div>
+
+        <div class="file">
+            <h3 ng-click="file_ctrl=!file_ctrl">{{ctrl.name}}Ctrl.js</h3>
+            <div class="code" ng-show="file_ctrl">
+                <pre class="pre">
+app.controller(<b class="str">'{{ctrl.name}}Ctrl'</b>, function ($scope<span ng-show="ctrl.hasService">, {{ctrl.name}}Service</span>) {
+   
+    <span class="kwd">var</span> self = this;
+    self.data=[];
+    <span ng-show="ctrl.hasService"> 
+    <span class="kbd">var</span> params = {};
+    self.getData = function () {
+        {{ctrl.name}}Service.getData(params).then(function (data) {
+            self.data = data;
+        });
+    };
+    self.getData();</span>
+});
+</pre>
+            </div>
+        </div>
+
+        <div class="file" ng-show="ctrl.hasService">
+            <h3 ng-click="file_service=!file_service">{{ctrl.name}}Service.js</h3>
+            <div class="code" ng-show="file_service">
+                <pre class="pre">
+app.factory(<span class="str">'{{ctrl.name}}Service'</span>, [<span class="str">'$http'</span>, <span class="str">'$q'</span>, function ($http,$q ) {
+
+    return {
+        getData: getData
+     }
+
+    function getData(params) {
+                    <span ng-show="!ctrl.simpleService">var deferred = $q.defer();
+        $http({
+            method: 'POST',
+            dataType: 'json',
+            headers: { 'Content-Type': 'application/json; charset=utf-8' },
+            data: JSON.stringify(params),
+            url: <span class="str">'{{ctrl.url}}'</span>
+        }).then(function success(response) {
+            deferred.resolve(response.data);
+        }, function error(response) {
+            deferred.reject(response);
+        });
+        return deferred.promise;</span> 
+    }
+  
+}]);
+</pre>
+            </div>
+        </div>
+
+        <div class="file">
+            <h3 ng-click="file_html=!file_html">{{ctrl.name}}.html</h3>
+            <div class="code" ng-show="file_html">
+                <pre class="pre">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+           &lt;meta charset="utf-8" /&gt;
+
+           &lt;script src="scripts/angular.min.js"&gt;&lt;/script&gt;
+           &lt;script src="scripts/app.js"&gt;&lt;/script&gt;
+           <span ng-show="ctrl.hasService">&lt;script src="scripts/{{ctrl.name}}Service.js"&gt;&lt;/script&gt;
+           </span>&lt;script src="scripts/{{ctrl.name}}Ctrl.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body ng-app=<b class="str">&quot;myApp&quot;</b> ng-controller=<b class="str">&quot;{{ctrl.name}}Ctrl as ctrl&quot;</b>&gt;
+          <span>{</span>{<span class="str">ctrl.data</span><span>}</span>}
+&lt;/body&gt;</pre>
+            </div>
+        </div>
+
+        <div class="simple-tree">
+            <ul>
+                <li>
+                    <span>scripts</span>
+                    <ul>
+                        <li><span>angular.min.js</span></li>
+                        <li><span>app.js</span></li>
+                        <li><span>{{ctrl.name}}Ctrl.js</span></li>
+                        <li><span>{{ctrl.name}}Service.js</span></li>
+                    </ul>
+                </li>
+                <li><span>{{ctrl.name}}.html</span></li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="scripts/code/copyToCliboard.js"></script>
+</body>
+</html>

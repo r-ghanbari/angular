@@ -1,0 +1,165 @@
+﻿body {
+    margin: 0;
+}
+*{
+    box-sizing:border-box;
+}
+.header {
+    border-bottom: 3px solid #0078fe;
+    height: 70px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    background: #fff;
+    z-index: 100;
+}
+
+.top, .main {
+    width: 780px;
+    margin: 0 auto;
+    margin: 0 auto;
+    font:12px tahoma;
+    position:relative;
+}
+.top .row{
+    min-height:30px;
+    padding-top:5px;
+}
+.top .row > div{
+    display:inline-block;
+    width:32%;
+
+}
+.main {
+    margin-top: 70px;
+}
+.text {
+    border: 1px solid #aaa;
+    border-radius: 1px;
+    color: #666;
+    padding: 0 0 2px 5px;
+    width:120px;
+}
+.text:focus {
+    border-color: #66afe9;
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 3px rgba(102,175,233,.6);
+}
+.file {
+    background-color: hsla(0,0%,95%,.2);
+    border: .5px solid #dbdbdb;
+    border-radius: 3px;
+    font: 15px/24px Consolas;
+    margin-bottom: 14px;
+}
+
+.file h3 {
+    margin: 0 -1px -1px -1px;
+    font-size: 13px;
+    padding: 6px 0 3px 25px;
+    background: #1e88e5;
+    color: #fff;
+    border-radius: 3px 3px 0 0;
+    cursor: pointer;
+    border-bottom: 2px solid #c9f9bf;
+}
+
+.code {
+    position: relative;
+    margin-top: 12px;
+}
+
+.code .copy {
+    position: absolute;
+    right: 13px;
+    top: -8px;
+    display: inline-block;
+    width: 10px;
+    height: 12px;
+    z-index: 50;
+    cursor: pointer;
+    border: 2px solid #afafaf;
+    border-radius: 2px;
+    border-width: 1px 0 0 1px;
+    opacity: 0.65;
+}
+
+.code .copy:hover {
+    opacity: 1;
+}
+
+.code .copy:after {
+    content: "";
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 1px;
+    top: 1px;
+    border: 1px solid #afafaf;
+    border-radius: 2px;
+    /*! background: #f5f5f5; */
+}
+
+pre {
+    margin-left: 25px;
+    border: none;
+    background: none;
+    line-height: 20px;
+    font:13px consolas;
+}
+
+.str {
+    color: #f00;
+}
+
+.kwd {
+    color: #00f;
+}
+
+.lit {
+    color: #458383;
+}
+
+.ur {
+    text-decoration: underline;
+}
+
+
+.simple-tree {
+    font: bold 12px/22px Arial;
+    color: #868686;
+    position: absolute;
+    left: 790px;
+    top: 12px;
+}
+
+.simple-tree ul {
+    direction: ltr;
+    list-style: outside none none;
+    overflow: hidden;
+    padding-left: 24px;
+}
+
+.simple-tree span {
+    display: block;
+}
+
+.simple-tree ul ul span {
+    position: relative;
+}
+
+.simple-tree ul ul span::after {
+    border-color: #dbdbdb;
+    border-radius: 0 0 1px 0 ;
+    border-style: solid;
+    border-width: 0 0 1px 1px;
+    bottom: 7px;
+    content: "";
+    height: 9999px;
+    position: absolute;
+    left: -21px;
+    width: 17px;
+}
+
