@@ -1,2 +1,2 @@
 "# angular" 
-create you first angularjs application
+#Create you first angularjs application
