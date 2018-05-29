@@ -16,6 +16,10 @@
                     <span>Business Name:</span>
                     <input class="text" type="text" ng-model="ctrl.name" />
                 </div>
+				<div>
+                    <input type="checkbox" id="material" ng-model="ctrl.material" />
+                    <label for="material">Use Material</label>
+                </div>
             </div>
             <div class="row">
                 <div>
@@ -30,6 +34,7 @@
                     <input type="checkbox" id="simpleService" ng-model="ctrl.simpleService" />
                     <label for="simpleService">Simple Service</label>
                 </div>
+				
             </div>
         </div>
     </div>
@@ -38,7 +43,7 @@
             <h3 ng-click="file_app=!file_app">app.js</h3>
             <div class="code" ng-show="file_app">
                 <pre class="pre">
-<span class="kwd">var</span> app = angular.module(<b class="str">'myApp'</b>, []);
+<span class="kwd">var</span> app = angular.module(<b class="str">'myApp'</b>, [<span ng-show="ctrl.material"><span class="g">'ngMaterial'</span>,<span class="g">'ngMessages'</span></span>]);
                </pre>
             </div>
         </div>
@@ -102,15 +107,20 @@ app.factory(<span class="str">'{{ctrl.name}}Service'</span>, [<span class="str">
 &lt;!DOCTYPE html&gt;
 &lt;html&gt;
 &lt;head&gt;
-           &lt;meta charset="utf-8" /&gt;
+    &lt;meta charset="utf-8" /&gt;
 
-           &lt;script src="scripts/angular.min.js"&gt;&lt;/script&gt;
-           &lt;script src="scripts/app.js"&gt;&lt;/script&gt;
-           <span ng-show="ctrl.hasService">&lt;script src="scripts/{{ctrl.name}}Service.js"&gt;&lt;/script&gt;
-           </span>&lt;script src="scripts/{{ctrl.name}}Ctrl.js"&gt;&lt;/script&gt;
+    &lt;script src="scripts/angular.min.js"&gt;&lt;/script&gt;
+    &lt;script src="scripts/app.js"&gt;&lt;/script&gt;
+    <span ng-show="ctrl.hasService">&lt;script src="scripts/{{ctrl.name}}Service.js"&gt;&lt;/script&gt;
+    </span>&lt;script src="scripts/{{ctrl.name}}Ctrl.js"&gt;&lt;/script&gt;
+    <span class="c" ng-show="ctrl.material"><%--Add Material libraries--%></span>
 &lt;/head&gt;
-&lt;body ng-app=<b class="str">&quot;myApp&quot;</b> ng-controller=<b class="str">&quot;{{ctrl.name}}Ctrl as ctrl&quot;</b>&gt;
-          <span>{</span>{<span class="str">ctrl.data</span><span>}</span>}
+&lt;body ng-app=<b class="str">&quot;myApp&quot;</b>&gt;
+    &lt;div ng-controller=<b class="str">&quot;{{ctrl.name}}Ctrl as ctrl&quot;</b>&gt;
+		
+	    <span>{</span>{<span class="str">ctrl.data</span><span>}</span>}
+
+    &lt;/div&gt;
 &lt;/body&gt;</pre>
             </div>
         </div>
@@ -123,7 +133,7 @@ app.factory(<span class="str">'{{ctrl.name}}Service'</span>, [<span class="str">
                         <li><span>angular.min.js</span></li>
                         <li><span>app.js</span></li>
                         <li><span>{{ctrl.name}}Ctrl.js</span></li>
-                        <li><span>{{ctrl.name}}Service.js</span></li>
+                        <li ng-show="ctrl.hasService"><span>{{ctrl.name}}Service.js</span></li>
                     </ul>
                 </li>
                 <li><span>{{ctrl.name}}.html</span></li>

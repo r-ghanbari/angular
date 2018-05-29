@@ -121,7 +121,13 @@ pre {
 .lit {
     color: #458383;
 }
-
+.g{
+	color:forestgreen;
+}
+.c{
+	color:gray;
+	font-style:italic;
+}
 .ur {
     text-decoration: underline;
 }
@@ -139,7 +145,7 @@ pre {
     direction: ltr;
     list-style: outside none none;
     overflow: hidden;
-    padding-left: 24px;
+    padding: 0 10px 0 24px;
 }
 
 .simple-tree span {
